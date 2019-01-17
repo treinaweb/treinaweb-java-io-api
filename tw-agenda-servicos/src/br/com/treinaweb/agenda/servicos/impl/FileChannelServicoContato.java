@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,7 @@ public class FileChannelServicoContato implements ServicoContato {
 	public void exportar(List<Contato> contatos, String nomeArquivo) throws IOException {
 		try (FileOutputStream fileOutputStream = new FileOutputStream(nomeArquivo)) {
 			try (FileChannel fileChannel = fileOutputStream.getChannel()) {
+				FileLock lock = fileChannel.tryLock();
 				List<String> dados = contatos.stream().map(contato -> String.format("%d;%s;%d;%s\n", contato.getId(),
 						contato.getNome(), contato.getIdade(), contato.getTelefone())).collect(Collectors.toList());
 				for (String dado : dados) {
@@ -25,6 +27,7 @@ public class FileChannelServicoContato implements ServicoContato {
 					buffer.flip();
 					fileChannel.write(buffer);
 				}
+				lock.release();
 			}
 		}
 	}

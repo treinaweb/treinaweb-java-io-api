@@ -13,6 +13,7 @@ public class FileOutputStreamServicoContato implements ServicoContato {
 	@Override
 	public void exportar(List<Contato> contatos, String nomeArquivo) throws IOException {
 		try (FileOutputStream fileStream = new FileOutputStream(nomeArquivo)) {
+//			fileStream.getChannel().tryLock();
 			List<String> dados = contatos.stream().map(contato -> String.format("%d;%s;%d;%s\n", contato.getId(),
 					contato.getNome(), contato.getIdade(), contato.getTelefone())).collect(Collectors.toList());
 			for (String dado : dados) {
