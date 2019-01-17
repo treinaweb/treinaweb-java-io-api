@@ -11,6 +11,8 @@ import br.com.treinaweb.agenda.entidades.Contato;
 import br.com.treinaweb.agenda.repositorios.impl.ContatoRepositorio;
 import br.com.treinaweb.agenda.repositorios.impl.ContatoRepositorioJdbc;
 import br.com.treinaweb.agenda.repositorios.interfaces.AgendaRepositorio;
+import br.com.treinaweb.agenda.servicos.impl.BufferedWriterServicoContato;
+import br.com.treinaweb.agenda.servicos.interfaces.ServicoContato;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -168,6 +170,21 @@ public class MainController implements Initializable {
 		this.botaoAlterar.setDisable(edicaoEstaHabilitada);
 		this.botaoExcluir.setDisable(edicaoEstaHabilitada);
 		this.tabelaContatos.setDisable(edicaoEstaHabilitada);
+	}
+
+	public void btnExportaContatos_Action() {
+		AgendaRepositorio<Contato> repositorioContato = new ContatoRepositorioJdbc();
+		try {
+			List<Contato> contatos = repositorioContato.selecionar();
+			ServicoContato servicoContato = new BufferedWriterServicoContato();
+			servicoContato.exportar(contatos, "/Users/clebercampomori/agenda.csv");
+		} catch (Exception e) {
+			Alert mensagem = new Alert(AlertType.ERROR);
+			mensagem.setTitle("Erro!");
+			mensagem.setHeaderText("Erro ao acessar recursos externos ou ao criar conexão com banco");
+			mensagem.setContentText("Houve um erro ao obter a lista de contatos: " + e.getMessage());
+			mensagem.showAndWait();
+		}
 	}
 
 }
