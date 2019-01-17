@@ -11,6 +11,7 @@ import br.com.treinaweb.agenda.entidades.Contato;
 import br.com.treinaweb.agenda.repositorios.impl.ContatoRepositorio;
 import br.com.treinaweb.agenda.repositorios.impl.ContatoRepositorioJdbc;
 import br.com.treinaweb.agenda.repositorios.interfaces.AgendaRepositorio;
+import br.com.treinaweb.agenda.servicos.impl.DataOutputStreamServicoContato;
 import br.com.treinaweb.agenda.servicos.impl.PrintWriterServicoContato;
 import br.com.treinaweb.agenda.servicos.interfaces.ServicoContato;
 import javafx.collections.FXCollections;
@@ -176,7 +177,7 @@ public class MainController implements Initializable {
 		AgendaRepositorio<Contato> repositorioContato = new ContatoRepositorioJdbc();
 		try {
 			List<Contato> contatos = repositorioContato.selecionar();
-			ServicoContato servicoContato = new PrintWriterServicoContato();
+			ServicoContato servicoContato = new DataOutputStreamServicoContato();
 			servicoContato.exportar(contatos, "/Users/clebercampomori/agenda.csv");
 			Alert mensagemSucesso = new Alert(AlertType.INFORMATION);
 			mensagemSucesso.setTitle("Sucesso!");
