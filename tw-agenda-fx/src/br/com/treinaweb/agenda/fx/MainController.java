@@ -177,7 +177,7 @@ public class MainController implements Initializable {
 		AgendaRepositorio<Contato> repositorioContato = new ContatoRepositorioJdbc();
 		try {
 			List<Contato> contatos = repositorioContato.selecionar();
-			ServicoContato servicoContato = new DataOutputStreamServicoContato();
+			ServicoContato servicoContato = new FileChannelServicoContato();
 			servicoContato.exportar(contatos, "/Users/clebercampomori/agenda.csv");
 			Alert mensagemSucesso = new Alert(AlertType.INFORMATION);
 			mensagemSucesso.setTitle("Sucesso!");
