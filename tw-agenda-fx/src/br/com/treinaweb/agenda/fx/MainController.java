@@ -16,6 +16,7 @@ import br.com.treinaweb.agenda.servicos.impl.exportadores.FileChannelServicoCont
 import br.com.treinaweb.agenda.servicos.impl.exportadores.Java7ServicoContato;
 import br.com.treinaweb.agenda.servicos.impl.exportadores.PrintWriterServicoContato;
 import br.com.treinaweb.agenda.servicos.impl.importadores.BufferedReaderServicoContatoImportador;
+import br.com.treinaweb.agenda.servicos.impl.importadores.Java7ServicoContatoImportador;
 import br.com.treinaweb.agenda.servicos.interfaces.ServicoExportadorContato;
 import br.com.treinaweb.agenda.servicos.interfaces.ServicoImportadorContato;
 import javafx.collections.FXCollections;
@@ -200,7 +201,7 @@ public class MainController implements Initializable {
 	public void btnImportarContatos_Action() {
 		AgendaRepositorio<Contato> repositorioContato = new ContatoRepositorioJdbc();
 		try {
-			ServicoImportadorContato importador = new BufferedReaderServicoContatoImportador();
+			ServicoImportadorContato importador = new Java7ServicoContatoImportador();
 			importador.importar("/Users/clebercampomori/agenda.csv", repositorioContato);
 			Alert mensagemSucesso = new Alert(AlertType.INFORMATION);
 			mensagemSucesso.setTitle("Sucesso!");
