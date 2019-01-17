@@ -178,6 +178,11 @@ public class MainController implements Initializable {
 			List<Contato> contatos = repositorioContato.selecionar();
 			ServicoContato servicoContato = new BufferedWriterServicoContato();
 			servicoContato.exportar(contatos, "/Users/clebercampomori/agenda.csv");
+			Alert mensagemSucesso = new Alert(AlertType.INFORMATION);
+			mensagemSucesso.setTitle("Sucesso!");
+			mensagemSucesso.setHeaderText("Sucesso na exportação!");
+			mensagemSucesso.setContentText("A exportação foi concluída com êxito!");
+			mensagemSucesso.showAndWait();
 		} catch (Exception e) {
 			Alert mensagem = new Alert(AlertType.ERROR);
 			mensagem.setTitle("Erro!");
