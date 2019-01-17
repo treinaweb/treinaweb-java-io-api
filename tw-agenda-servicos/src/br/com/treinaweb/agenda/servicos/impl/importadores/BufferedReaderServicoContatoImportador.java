@@ -16,8 +16,10 @@ public class BufferedReaderServicoContatoImportador implements ServicoImportador
 			throws IOException, SQLException {
 		try (FileReader fileReader = new FileReader(nomeArquivo)) {
 			try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-				String dado = "";
-				while ((dado = bufferedReader.readLine()) != null) {
+//				String dado = "";
+//				while ((dado = bufferedReader.readLine()) != null) {
+				while (bufferedReader.read() != -1) {
+					String dado = bufferedReader.readLine();
 					String[] informacoes = dado.split(";");
 					Contato contato = new Contato();
 					contato.setNome(informacoes[1]);

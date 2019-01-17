@@ -58,6 +58,7 @@
 						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
 						<Label text="Nome:" />
@@ -76,7 +77,8 @@
 						<TextField fx:id="txfTelefone" GridPane.columnIndex="2" GridPane.rowIndex="1" />
 						<Button fx:id="botaoSalvar" mnemonicParsing="false" onAction="#botaoSalvar_Action" prefHeight="27.0" prefWidth="146.0" text="Salvar" GridPane.columnIndex="2" GridPane.rowIndex="2" />
 						<Button fx:id="botaoCancelar" mnemonicParsing="false" onAction="#botaoCancelar_Action" prefHeight="27.0" prefWidth="146.0" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" onAction="#btnExportaContatos_Action" prefHeight="27.0" prefWidth="142.0" text="Exportar" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#btnExportaContatos_Action" prefHeight="27.0" prefWidth="265.0" text="Exportar" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#btnImportarContatos_Action" prefHeight="27.0" prefWidth="265.0" text="Importar" GridPane.rowIndex="3" />
 					</children>
 				</GridPane>
 			</content>

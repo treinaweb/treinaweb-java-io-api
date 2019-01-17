@@ -15,7 +15,9 @@ import br.com.treinaweb.agenda.servicos.impl.exportadores.DataOutputStreamServic
 import br.com.treinaweb.agenda.servicos.impl.exportadores.FileChannelServicoContato;
 import br.com.treinaweb.agenda.servicos.impl.exportadores.Java7ServicoContato;
 import br.com.treinaweb.agenda.servicos.impl.exportadores.PrintWriterServicoContato;
+import br.com.treinaweb.agenda.servicos.impl.importadores.BufferedReaderServicoContatoImportador;
 import br.com.treinaweb.agenda.servicos.interfaces.ServicoExportadorContato;
+import br.com.treinaweb.agenda.servicos.interfaces.ServicoImportadorContato;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -185,6 +187,25 @@ public class MainController implements Initializable {
 			mensagemSucesso.setTitle("Sucesso!");
 			mensagemSucesso.setHeaderText("Sucesso na exportação!");
 			mensagemSucesso.setContentText("A exportação foi concluída com êxito!");
+			mensagemSucesso.showAndWait();
+		} catch (Exception e) {
+			Alert mensagem = new Alert(AlertType.ERROR);
+			mensagem.setTitle("Erro!");
+			mensagem.setHeaderText("Erro ao acessar recursos externos ou ao criar conexão com banco");
+			mensagem.setContentText("Houve um erro ao obter a lista de contatos: " + e.getMessage());
+			mensagem.showAndWait();
+		}
+	}
+
+	public void btnImportarContatos_Action() {
+		AgendaRepositorio<Contato> repositorioContato = new ContatoRepositorioJdbc();
+		try {
+			ServicoImportadorContato importador = new BufferedReaderServicoContatoImportador();
+			importador.importar("/Users/clebercampomori/agenda.csv", repositorioContato);
+			Alert mensagemSucesso = new Alert(AlertType.INFORMATION);
+			mensagemSucesso.setTitle("Sucesso!");
+			mensagemSucesso.setHeaderText("Sucesso na importação!");
+			mensagemSucesso.setContentText("A importação foi concluída com êxito!");
 			mensagemSucesso.showAndWait();
 		} catch (Exception e) {
 			Alert mensagem = new Alert(AlertType.ERROR);
