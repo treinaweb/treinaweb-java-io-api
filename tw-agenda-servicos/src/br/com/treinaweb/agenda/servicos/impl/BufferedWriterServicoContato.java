@@ -15,11 +15,14 @@ public class BufferedWriterServicoContato implements ServicoContato {
 	public void exportar(List<Contato> contatos, String nomeArquivo) throws IOException {
 		// BufferedWriter (Writer) --> FileWriter (apontador --> arquivo no HD
 		FileWriter fileWriter = new FileWriter(nomeArquivo);
-		BufferedWriter writer = new BufferedWriter(fileWriter);
-		List<String> dadosParaExportar = contatos.stream().map(contato -> String.format("%d;%s;%d;%s\n",
-				contato.getId(), contato.getNome(), contato.getIdade(), contato.getTelefone()))
-				.collect(Collectors.toList());
-		dadosParaExportar.forEach(linha -> writer.write(linha));
+		try (BufferedWriter writer = new BufferedWriter(fileWriter)) {
+			List<String> dadosParaExportar = contatos.stream().map(contato -> String.format("%d;%s;%d;%s\n",
+					contato.getId(), contato.getNome(), contato.getIdade(), contato.getTelefone()))
+					.collect(Collectors.toList());
+			for (String linha : dadosParaExportar) {
+				writer.write(linha);
+			}
+		}
 	}
 
 }
