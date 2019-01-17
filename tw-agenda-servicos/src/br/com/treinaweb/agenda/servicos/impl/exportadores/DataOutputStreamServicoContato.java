@@ -1,4 +1,4 @@
-package br.com.treinaweb.agenda.servicos.impl;
+package br.com.treinaweb.agenda.servicos.impl.exportadores;
 
 import java.io.DataOutputStream;
 import java.io.FileOutputStream;
@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.treinaweb.agenda.entidades.Contato;
-import br.com.treinaweb.agenda.servicos.interfaces.ServicoContato;
+import br.com.treinaweb.agenda.servicos.interfaces.ServicoExportadorContato;
 
-public class DataOutputStreamServicoContato implements ServicoContato {
+public class DataOutputStreamServicoContato implements ServicoExportadorContato {
 
 	@Override
 	public void exportar(List<Contato> contatos, String nomeArquivo) throws IOException {

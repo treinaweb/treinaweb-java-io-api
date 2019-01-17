@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.com.treinaweb.agenda.entidades.Contato;
 
-public interface ServicoContato {
+public interface ServicoExportadorContato {
 
 	void exportar(List<Contato> contatos, String nomeArquivo) throws IOException;
 

@@ -11,11 +11,11 @@ import br.com.treinaweb.agenda.entidades.Contato;
 import br.com.treinaweb.agenda.repositorios.impl.ContatoRepositorio;
 import br.com.treinaweb.agenda.repositorios.impl.ContatoRepositorioJdbc;
 import br.com.treinaweb.agenda.repositorios.interfaces.AgendaRepositorio;
-import br.com.treinaweb.agenda.servicos.impl.DataOutputStreamServicoContato;
-import br.com.treinaweb.agenda.servicos.impl.FileChannelServicoContato;
-import br.com.treinaweb.agenda.servicos.impl.Java7ServicoContato;
-import br.com.treinaweb.agenda.servicos.impl.PrintWriterServicoContato;
-import br.com.treinaweb.agenda.servicos.interfaces.ServicoContato;
+import br.com.treinaweb.agenda.servicos.impl.exportadores.DataOutputStreamServicoContato;
+import br.com.treinaweb.agenda.servicos.impl.exportadores.FileChannelServicoContato;
+import br.com.treinaweb.agenda.servicos.impl.exportadores.Java7ServicoContato;
+import br.com.treinaweb.agenda.servicos.impl.exportadores.PrintWriterServicoContato;
+import br.com.treinaweb.agenda.servicos.interfaces.ServicoExportadorContato;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -179,7 +179,7 @@ public class MainController implements Initializable {
 		AgendaRepositorio<Contato> repositorioContato = new ContatoRepositorioJdbc();
 		try {
 			List<Contato> contatos = repositorioContato.selecionar();
-			ServicoContato servicoContato = new FileChannelServicoContato();
+			ServicoExportadorContato servicoContato = new FileChannelServicoContato();
 			servicoContato.exportar(contatos, "/Users/clebercampomori/agenda.csv");
 			Alert mensagemSucesso = new Alert(AlertType.INFORMATION);
 			mensagemSucesso.setTitle("Sucesso!");
